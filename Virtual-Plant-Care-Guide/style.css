@@ -73,3 +73,161 @@ body { background: linear-gradient(135deg, #1a4731, #2d6a4f); min-height: 100vh;
 .close-btn:hover {
     color: red;
 }
+
+#historyList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#historyList li small {
+    color: #555;
+    font-size: 0.8em;
+    display: block;
+    margin-top: 4px;
+}
+
+.modal-content .btn.secondary {
+    background: #e74c3c;
+    color: white;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.modal-content .btn.secondary:hover {
+    background: #c0392b;
+}
+
+#guideList {
+    list-style-type: none;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#guideList li {
+    padding: 10px;
+    margin-bottom: 6px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#guideList li strong {
+    color: #2c3e50;
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 5px;
+}
+
+#guideList li small {
+    color: #555;
+    font-size: 0.9em;
+}
+
+#historyList li {
+    background: rgba(76, 175, 80, 0.1);
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+
+.background-shapes {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.shape {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+}
+
+.shape:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+}
+
+.shape:nth-child(2) {
+    width: 200px;
+    height: 200px;
+    bottom: 50px;
+    right: -100px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 6rem auto 2rem;
+    padding: 0 1.5rem;
+}
+
+
+
+.camera-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    padding: 3rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 2rem 0;
+}
+
+#video {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.camera-container:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
+
+.camera-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.controls {
+    padding-bottom: 0.8rem;
+}
+
+.btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
