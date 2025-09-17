@@ -132,3 +132,76 @@ function classifyVideo() {
         }
     });
 }
+
+// ---------------------- BACKEND AI ----------------------
+const sendToBackend = async (base64Image) => {
+    try {
+        const response = await fetch("http://localhost:5000/generate-treatment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ diseaseName, base64Image }),
+        });
+
+        const data = await response.json();
+        let finalResult = md.render(data.text);
+        treatmentEl.innerHTML = `<p>${finalResult}</p>`;
+    } catch (err) {
+        console.error("AI generation failed:", err);
+        showFallbackTreatment(diseaseName);
+    }
+};
+
+// Fallback treatment
+function showFallbackTreatment(disease) {
+    if (disease.startsWith("Healthy")) {
+        treatmentEl.innerHTML = `<p>Plant is healthy! Keep it watered, provide sunlight, and avoid over-fertilizing.</p>`;
+    } else {
+        treatmentEl.innerHTML = `<p><strong>${disease}</strong> detected! Follow these steps:</p>
+            <ol>
+                <li>Remove affected leaves or parts of the plant.</li>
+                <li>Use appropriate fungicide or pesticide if required.</li>
+                <li>Ensure proper sunlight and watering schedule.</li>
+                <li>Monitor the plant daily for improvement.</li>
+            </ol>`;
+    }
+}
+
+// ---------------------- QUICK ACTION BUTTONS ----------------------
+scanPlantBtn.addEventListener("click", () => {
+    alert("Starting plant scan...");
+    startDetect.click();
+});
+
+// ---------------------- PLANT GUIDE AI INTEGRATION ----------------------
+plantGuideBtn.addEventListener("click", async () => {
+    if (!diseaseName) {
+        alert("Please scan a plant first to see the guide!");
+        return;
+    }
+
+    plantGuideModal.style.display = "block";
+    guideList.innerHTML = "<li>Loading AI guidance...</li>";
+
+    try {
+        const response = await fetch("http://localhost:5000/generate-treatment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ diseaseName, base64Image: canvas.toDataURL("image/png") }),
+        });
+
+        const data = await response.json();
+        guideList.innerHTML = ""; // Clear loading
+
+        const aiText = data.text.split(/\n+/);
+        aiText.forEach((step, index) => {
+            if (step.trim() !== "") {
+                const li = document.createElement("li");
+                li.innerHTML = `<strong>Step ${index + 1}</strong><br><small>${step}</small>`;
+                guideList.appendChild(li);
+            }
+        });
+    } catch (err) {
+        console.error("Failed to fetch Plant Guide AI:", err);
+        guideList.innerHTML = `<li>Failed to load guide. Please try again.</li>`;
+    }
+});
