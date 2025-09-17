@@ -38,3 +38,7 @@ app.post("/generate-treatment", async (req, res) => {
         res.status(500).json({ error: "Failed to generate treatment." });
     }
 });
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
