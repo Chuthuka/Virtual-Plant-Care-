@@ -10,3 +10,6 @@ const PORT = 5000;
 const genAI = new GoogleGenerativeAI("####AIzaSyCy2tz5NP3XoKrqLAp_RcYXTwTYIuiFjy8####");
 
 //Remove #### from API key before running the server
+
+app.use(cors());
+app.use(bodyParser.json({ limit: "10mb" }));
