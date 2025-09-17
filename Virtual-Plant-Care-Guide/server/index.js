@@ -5,3 +5,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const app = express();
 const PORT = 5000;
+
+// Replace with your Google API Key
+const genAI = new GoogleGenerativeAI("####AIzaSyCy2tz5NP3XoKrqLAp_RcYXTwTYIuiFjy8####");
+
+//Remove #### from API key before running the server
