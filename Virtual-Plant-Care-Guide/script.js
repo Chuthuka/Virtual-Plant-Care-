@@ -205,3 +205,39 @@ plantGuideBtn.addEventListener("click", async () => {
         guideList.innerHTML = `<li>Failed to load guide. Please try again.</li>`;
     }
 });
+
+// ---------------------- MODALS ----------------------
+// Close Plant Guide
+closeGuide.addEventListener("click", () => plantGuideModal.style.display = "none");
+
+// Close History
+historyBtn.addEventListener("click", () => {
+    historyList.innerHTML = "";
+    if (scanHistory.length === 0) {
+        historyList.innerHTML = "<li>No history yet.</li>";
+    } else {
+        scanHistory.forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `<strong>${item.disease}</strong> - Confidence: ${item.confidence}<br><small>🕒 ${item.time}</small>`;
+            historyList.appendChild(li);
+        });
+    }
+    historyModal.style.display = "block";
+});
+
+closeHistory.addEventListener("click", () => historyModal.style.display = "none");
+
+// Clear history
+clearHistoryBtn.addEventListener("click", () => {
+    scanHistory = [];
+    historyList.innerHTML = "<li>History cleared.</li>";
+});
+
+// Close modals when clicking outside
+window.addEventListener("click", (e) => {
+    if (e.target === plantGuideModal) plantGuideModal.style.display = "none";
+    if (e.target === historyModal) historyModal.style.display = "none";
+});
+
+// Search static guide (optional)
+guideSearch.addEventListener("input", (e) => renderGuideList(e.target.value));
